@@ -2,6 +2,18 @@
 #include <iostream>
 #include <functional>
 
+/*
+enum class FadeType {
+  None,
+  
+  FullScreen,
+  Circle,
+  Vell,
+  FromLeft,
+  FromRight,
+  BothSide,
+  Hole
+};*/
 
 enum FadeType {
   Circle,
