@@ -1,63 +1,21 @@
 
 #include <iostream>
-#include <functional>
+#include <vector>
 
-/*
-enum class FadeType {
-  None,
-  
-  FullScreen,
-  Circle,
-  Vell,
-  FromLeft,
-  FromRight,
-  BothSide,
-  Hole
-};*/
-
-enum FadeType {
-  Circle,
-  FullScreec
-};
-
-
-
-class Fade {
-private:
-  std::function<void()> fade;
-  void a();
-  void b();
-  
-public:
-  void setOutType(FadeType type);
-  
-  void draw();
-};
-
-void Fade::a() {
-  std::cout << "a" << std::endl;
-}
-
-void Fade::b() {}
-
-void Fade::setOutType(FadeType type) {
-  switch (type) {
-    case Circle:
-      fade = [=]{ a(); };
-    break;
-      
-    case FullScreec:
-      fade = [=]{ b(); };
-    break;
-  }
-}
-
-void Fade::draw() {
-  fade();
-}
 
 int main() {
-  Fade fade;
-  fade.setOutType(Circle);
-  fade.draw();
+  std::vector<int> v = {
+    0, 1, 2, 3, 4, 5
+  };
+  
+  auto vItr = v.begin();
+  std::cout << "first = " << *vItr << std::endl;
+  
+  vItr = v.end();
+  std::cout << "last = " << *(--vItr) <<std::endl;
+  
+  
+  // 出力結果
+  // first = 0
+  // last = 5
 }
