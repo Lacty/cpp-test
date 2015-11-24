@@ -1,21 +1,35 @@
 
 #include <iostream>
-#include <vector>
 
+
+class Fade {
+private:
+  bool mIsDuringFade;
+public:
+  void set();
+  void draw();
+
+  bool isDuringFade();
+}
+
+void Fade::set() {
+  isDuringFade = true;
+}
+
+void Fade::draw() {
+  // 処理
+  if (終了条件) {
+    mIsDuringFade = false;
+  }
+  // 描画
+}
+
+bool Fade::isDuringFade() {
+  return mIsDuringFade;
+}
 
 int main() {
-  std::vector<int> v = {
-    0, 1, 2, 3, 4, 5
-  };
-  
-  auto vItr = v.begin();
-  std::cout << "first = " << *vItr << std::endl;
-  
-  vItr = v.end();
-  std::cout << "last = " << *(--vItr) <<std::endl;
-  
-  
-  // 出力結果
-  // first = 0
-  // last = 5
+  Fade fade;
+  fade.set();
+  fade.draw();
 }
