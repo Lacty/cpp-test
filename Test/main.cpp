@@ -1,35 +1,57 @@
 
 #include <iostream>
+#include <arpa/inet.h>
 
 
-class Fade {
-private:
-  bool mIsDuringFade;
-public:
-  void set();
-  void draw();
-
-  bool isDuringFade();
-}
-
-void Fade::set() {
-  isDuringFade = true;
-}
-
-void Fade::draw() {
-  // 処理
-  if (終了条件) {
-    mIsDuringFade = false;
+unsigned long toLongIPAddr(char* ip, int index)
+{
+  int dot_index[3];
+  int k = 0;
+  for (int i = 0; i < index; i++) {
+    if (ip[i] != '.') continue;
+    dot_index[k] = i;
+    k++;
   }
-  // 描画
+  k = 0;
+  unsigned long result[4];
+  int i = 0;
+  while (i != 4) {
+    switch (i) {
+    case 0:
+      result[i] = std::stoi(&ip[0]);
+      result[i] = result[i] * 256 * 256 * 256;
+      i++;
+    break;
+    case 1:
+      result[i] = std::stoi(&ip[dot_index[k] + 1]);
+      result[i] = result[i] * 256 * 256;
+      k++;
+      i++;
+    break;
+    case 2:
+      result[i] = std::stoi(&ip[dot_index[k] + 1]);
+      result[i] = result[i] * 256;
+      k++;
+      i++;
+    break;
+    case 3:
+      result[i] = std::stoi(&ip[dot_index[k] + 1]);
+      k++;
+      i++;
+    break;
+    }
+  }
+  return result[0] + result[1] + result[2] + result[3];
 }
 
-bool Fade::isDuringFade() {
-  return mIsDuringFade;
-}
-
-int main() {
-  Fade fade;
-  fade.set();
-  fade.draw();
+int main()
+{
+  char address[] = "192.168.1.1";
+  
+  std::cout << toLongIPAddr(address, sizeof(address)) << std::endl;
+  
+  #include <arpa/inet.h>
+  std::cout << inet_addr("127.0.0.1") << std::endl;
+  
+  return 0;
 }
