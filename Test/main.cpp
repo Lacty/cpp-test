@@ -1,26 +1,33 @@
 
 #include <iostream>
-#include <thread>
 
+// 1バイト8ビット
 
-void task1() {
-  std::cout << "->task1" << std::endl;
-  std::cout << "<-task1" << std::endl;
-}
-
-void task2() {
-  std::string str;
-  std::cout << "->task2" << std::endl;
-  std::cin >> str;
-  std::cout << str << std::endl;
-  std::cout << "<-task2" << std::endl;
-}
+enum {
+  MouseLeft  = 1 << 0,
+  MouseRight = 1 << 1,
+  MouseUp    = 1 << 2,
+  MouseDown  = 1 << 3
+};
 
 int main()
 {
-  std::thread th1(&task1);
-  std::thread th2(&task2);
-  th2.join();
-  th1.join();
-  return 0;
+  unsigned char button = 0;
+  
+  std::cout << (button & MouseLeft) << std::endl;
+  
+  button = MouseLeft;
+  std::cout << (button & MouseLeft) << std::endl;
+  
+  button = ~MouseLeft;
+  std::cout << (button & MouseLeft) << std::endl;
+  
+  
+  button = MouseRight;
+  std::cout << (button & MouseLeft) << std::endl;
+  std::cout << (button & MouseRight) << std::endl;
+  
+  button = ~MouseRight;
+  std::cout << (button & MouseLeft) << std::endl;
+  std::cout << (button & MouseRight) << std::endl;
 }
